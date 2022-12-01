@@ -1,29 +1,29 @@
 // Just adding Items
 const inputText = document.getElementById('inputText')
-const addToCartBtn = document.getElementById('addCartBtn');
-const listItems = document.querySelector('.container')
+const addToCartBtn = document.querySelector('.addCartBtn');
+const listItems = document.querySelector('.container ul')
 
 addToCartBtn.addEventListener('click', (event) => {
-    if(inputText.value){
-        // event.preventDefault();
+    if(inputText.value !== ''){
+        event.preventDefault(); // need to know that it does
         var items = document.createElement('li');
         items.innerText = inputText.value;
         listItems.appendChild(items);
-
+        // creating span for list items
         const spanBtn = document.createElement('span');
         spanBtn.innerHTML = 'X';
-        inputText.append(spanBtn);
+        items.appendChild(spanBtn);
     }
-    inputText.value = '';
-    const close = document.getElementById('span');
+    const close = document.querySelectorAll('span');
     for(let i=0; i<close.length; i++){
         close[i].addEventListener('click', ()=>{
-            close[i].currentElement.style.opacity = 0;
-            close[i].currentElement.style.display = 'none';
+            close[i].parentElement.style.opacity = 0;
+            setTimeout(() => {
+                close[i].parentElement.style.display = 'none';
+                close[i].parentElement.remove();
+            }, 500)
         })
     }
+    inputText.value = '';
 })
 
-addToCartBtn.addEventListener('click', (event) => {
-
-})
